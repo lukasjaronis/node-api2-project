@@ -1,11 +1,6 @@
-const express = require('express');
-
-const postRouter = require('./Post/post-router');
-const commentRouter = require('./Comments/comment-router');
-
+const express = require("express");
+const postsRouter = require("../Post/post-router");
 const server = express();
-
-server.use(express.json()); // this is enabling us to use json
-
-server.use('/api/posts', postRouter);
-server.use('/api/comments', commentRouter);
+server.use(express.json());
+server.use('/api/posts', postsRouter);
+module.exports = server;

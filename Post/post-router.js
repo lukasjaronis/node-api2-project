@@ -40,27 +40,25 @@ router.get("/:id", (request, response) => {
     });
 });
 
-// get posts by comments
+//get posts by comments
 
-router.get("/:id/comments", (request, response) => {
-  const id = request.params.id;
-
-  Posts.findCommentById(id)
-    .then(findingByComment => {
-      if (findingByComment.length > 0) {
-        response.status(200).json(findingByComment);
-      } else {
-        response.status(404).json({
-          errorMessage: "The post with the specified ID does not exist."
-        });
-      }
+router.get('/:id/comments', (request, response) => {
+    const { id } = request.params
+    Posts.findPostComments(id)
+    .then(gettingComments => {
+        if (response.length === 0) {
+            response.status(404).json({ errorMessage: "The post with the specified ID does not exist." })
+        }
+        else {
+            response.status(200).json(gettingComments);
+        }
     })
     .catch(error => {
-      response.status(500).json({
-        errorMessage: `The post with the specified ID and comment could not be retrieved. ${error}`
-      });
-    });
-});
+        console.log(error);
+        response.status(500).json({ errorMessage: "The comments information could not be retrieved." })
+    })
+})
+
 
 // delete id
 

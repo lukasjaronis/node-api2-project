@@ -1,5 +1,5 @@
 const server = require("./api/server");
-const port = 10000;
+const port =  process.env.PORT || 10000;
 
 server.listen(port, () => {
   console.log(`API ONLINE ON PORT ${port}`);
